@@ -1,6 +1,20 @@
 Version 2.5
+	- Changed data type for "ProductName" field to adVarWChar (i18n)
 	- Added Greek language file for ss-xml2word.vbs (by Manos Petridis)
 	- Added Spanish language file for ss-xml2word.vbs (by Carlos de Blas Cartón)
+	- Added support for 32bit uninstallers on 64bit machines
+	- Added key recovery for additional MS Office versions (including 64bit) -- TODO: Fix actual key recovery
+	- Added function to extract numeric portion of KB number from registry value and corrected links in xml
+	- Added opening function to force use of cscript when called from wscript or cmd
+	- Fixed bug for empty values in uninstall information
+	- Moved patches listed only in registry uninstall to patches array
+	- Removed obsolete Q number filter
+	- Added "osapi" to opperatingsystem in XML report
+	- Added Server Features detection
+	- Added Windows 10 build detection
+	- Added Windows 10 internal to extranal build display and append to os_caption (Build 1511 for build 10586)
+	- Added "build" attribute to opperatingsystem in XML report
+	- Fixed "LastLoggedOnUser" check for Windows 7+
 
 Version 2.4
 	- Fixed bug for drive names in while generating XML files
