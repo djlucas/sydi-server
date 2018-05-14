@@ -1,6 +1,21 @@
+Version current (DJL)
+	- Added support for 32bit uninstallers on 64bit machines
+	- Added key recovery for additional MS Office versions (including 64bit) -- TODO: Fix actual key recovery
+	- Added function to extract numeric portion of KB number from registry value and corrected links in xml
+	- Added opening function to force use of cscript when called from wscript or cmd
+	- Fixed bug for empty values in uninstall information
+	- Moved patches listed only in registry uninstall to patches array
+	- Removed obsolete Q number filter
+	- Added "osapi" to opperatingsystem in XML report
+	- Added Server Features detection
+	- Added Windows 10 detection
+	- Added Windows 10 internal to external build display and append to os_caption (Build 1803 for build 17134)
+	- Added "build" attribute to opperatingsystem in XML report
+	- Fixed "LastLoggedOnUser" check for Windows 7+
+
 Version 2.5
 	- Added Greek language file for ss-xml2word.vbs (by Manos Petridis)
-	- Added Spanish language file for ss-xml2word.vbs (by Carlos de Blas CartÃ³n)
+	- Added Spanish language file for ss-xml2word.vbs (by Carlos de Blas Cartón)
 
 Version 2.4
 	- Fixed bug for drive names in while generating XML files
@@ -31,7 +46,7 @@ Version 2.1 - 2008-01-29
 	- Added language files for ss-xml2word.vbs: Dutch, Italian, Norwegian, Portuguese
 	- Added service comparison for computers (SYDI-Overview)
 	- Added IP Addresses to SYDI-Overview, it will only report one address in this version. (Stay tuned)
-
+	
 Version 2.0 - 2006-06-26
 	- Added ss-xml2word.vbs
 	- Added basic reporting for Internet Information Services (IIS)
