@@ -1,4 +1,5 @@
 Version current (DJL)
+	- Added registry checks for current IE and PS versions
 	- Added support for 32bit uninstallers on 64bit machines
 	- Added key recovery for additional MS Office versions (including 64bit) -- TODO: Fix actual key recovery
 	- Added function to extract numeric portion of KB number from registry value and corrected links in xml
