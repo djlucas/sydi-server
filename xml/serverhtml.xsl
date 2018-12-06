@@ -268,7 +268,12 @@ The system has <xsl:value-of select = "computer/processor/@count" /> processor(s
 <xsl:if test="computer/lastuser">
 	<b>Last Logged on User: </b><xsl:value-of select = "computer/lastuser/@name" /> <br />
 </xsl:if>
-
+<xsl:if test="computer/ieinfo">
+	<b>Internet Eplorer Version: </b><xsl:value-of select = "computer/ieinfo/@version" /> <br/>
+</xsl:if>
+<xsl:if test="computer/psinfo">
+	<b>PowerShell Version: </b><xsl:value-of select = "computer/psinfo/@version" /> <br/>
+</xsl:if>
 
 <xsl:if test="computer/windowscomponents/component">
 <h2 id="softwareplatform_windowscomponents">Windows Components</h2>
