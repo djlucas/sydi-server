@@ -209,6 +209,7 @@ Dim objDbrRegPrograms
 Dim strPrimaryDomain, strPrintSpoolLocation
 Dim strLastUser, strLastUserDomain
 Dim dictProductKeys, objDbrRegProductKeys
+Dim strPSVersion
 
 ' Variables for IIS Server
 Dim objDbrIISWebServerSetting, objDbrIISWebServerBindings
@@ -248,7 +249,7 @@ Dim bWMIBios, bWMIServerFeatures, bWMIRegistry, bWMIApplications,bWMIPatches,bWM
 Dim bWMIEventLogFile, bWMILocalAccounts, bWMILocalGroups, bWMIIP4Routes, bWMIRunningProcesses
 Dim bWMIHardware, bWMIStartupCommands, bGatherIEInformation
 ' Registry
-Dim bRegDomainSuffix, bRegWindowsComponents, bRegPrintSpoolLocation, bRegIEVersion, bRegLastUser, bRegProductKeys
+Dim bRegDomainSuffix, bRegWindowsComponents, bRegPrintSpoolLocation, bRegIEVersion, bRegLastUser, bRegProductKeys, bRegPSVersion
 Dim bRegPrograms, bDoRegistryCheck
 ' Username and Password
 Dim strUserName, strPassword
@@ -390,10 +391,11 @@ Sub DisplayHelp
  	WScript.Echo "   a	- Non Windows Installer Applications"
  	WScript.Echo "   c	- Windows Components"
  	WScript.Echo "   d	- FQDN Domain Name"
-	WScript.Echo "   i  - Internet Explorer"
+	WScript.Echo "   i	- Internet Explorer Version"
  	WScript.Echo "   k	- Product Keys"
  	WScript.Echo "   l	- Last Logged on user"
  	WScript.Echo "   p	- Print Spooler Location"
+	WScript.Echo "   P	- PowerShell Version"
  	WScript.Echo " -t	- Target Machine (Default: ask user)"
 	WScript.Echo " -u	- Username (To run with different credentials)"
 	WScript.Echo " -p	- Password (To run with different credentials, must be used with -u)"
@@ -748,6 +750,14 @@ Function GatherRegInformation()
 		oReg.GetStringValue HKEY_LOCAL_MACHINE,"SOFTWARE\Microsoft\Internet Explorer","svcVersion", strIEVersion
 	End If
 	
+	If (bRegPSVersion) Then
+		ReportProgress " Gathering PowerShell Version"
+		oReg.GetStringValue HKEY_LOCAL_MACHINE,"SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine","PowerShellVersion", strPSVersion
+		If  (IsNull (strPSVersion)) Then
+			oReg.GetStringValue HKEY_LOCAL_MACHINE,"SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine","PowerShellVersion", strPSVersion
+		End If
+	End If
+
 	If (bRegLastUser) Then
 		ReportProgress " Reading last user"
 		oReg.GetStringValue HKEY_LOCAL_MACHINE,"SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI","LastLoggedOnUser", strLastUser
@@ -840,6 +850,9 @@ Function GatherWMIInformation()
 		End If
 		If (strOperatingSystem_Build = "17134") Then
 			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 1803"
+		End If
+		If (strOperatingSystem_Build = "17763") Then
+			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 1809"
 		End If
 	End If
 	
@@ -1508,6 +1521,7 @@ Sub GetOptions()
 	bRegWindowsComponents = True
 	bRegLastUser = True
 	bRegIEVersion = True
+	bRegPSVersion = True
 	bDoRegistryCheck = True
 	strComputer = ""
 	bAlternateCredentials = False
@@ -2861,6 +2875,11 @@ Sub PopulateXMLFile()
 	' IE Information
 	If (bRegIEVersion) Then
 		objXMLFile.WriteLine " <ieinfo version=""" & strIEVersion & """ />"
+	End If
+
+	' PS Versin Information
+	If(bRegPSVersion) Then
+		objXMLFile.WriteLine " <psinfo version=""" & strPSVersion & """ />"
 	End If
 
 	' Last User
@@ -4581,6 +4600,7 @@ Sub SetOptions(strOption)
 				bRegIEVersion = False
 				bRegLastUser = False
 				bRegProductKeys	 = False
+				bRegPSVersion = False
 				bDoRegistryCheck = False
 				If (nArguments > 2) Then
 
@@ -4607,6 +4627,9 @@ Sub SetOptions(strOption)
 								bDoRegistryCheck = True
 							Case "p"
 								bRegPrintSpoolLocation = True
+								bDoRegistryCheck = True
+							Case "P"
+								bRegPSVersion = True
 								bDoRegistryCheck = True
 							Case Else
 								bInvalidArgument = True
