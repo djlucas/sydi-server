@@ -9,10 +9,11 @@ Version current (DJL)
 	- Removed obsolete Q number filter
 	- Added "osapi" to opperatingsystem in XML report
 	- Added Server Features detection
-	- Added Windows 10 detection
+	- Added Windows 10 API detection (up to 1709)
 	- Added Windows 10 internal to external build display and append to os_caption (Build 1803 for build 17134)
 	- Added "build" attribute to opperatingsystem in XML report
 	- Fixed "LastLoggedOnUser" check for Windows 7+
+	- Added Windows 10 internal to external build display and append to os_caption (Build 1903 for build 18362)
 
 Version 2.5
 	- Added Greek language file for ss-xml2word.vbs (by Manos Petridis)
