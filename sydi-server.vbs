@@ -857,6 +857,9 @@ Function GatherWMIInformation()
                 If (strOperatingSystem_Build = "18362") Then
 			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 1903"
 		End If
+                If (strOperatingSystem_Build = "18363") Then
+			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 1909"
+		End If
 	End If
 	
 	If (bWMIServerFeatures And bIsServer And strOperatingSystemLevel > 52) Then
