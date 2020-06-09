@@ -860,6 +860,9 @@ Function GatherWMIInformation()
                 If (strOperatingSystem_Build = "18363") Then
 			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 1909"
 		End If
+                If (strOperatingSystem_Build = "19041") Then
+			strOperatingSystem_Caption = arrOperatingSystem_Name(0) & " Build 2004"
+		End If
 	End If
 	
 	If (bWMIServerFeatures And bIsServer And strOperatingSystemLevel > 52) Then
@@ -4513,11 +4516,11 @@ Function Scrub4XML(strInput)
 		strInput = Replace(strInput,"<","&lt;")
 		strInput = Replace(strInput,">","&gt;")
 		strInput = Replace(strInput,"'","&apos;")
-		strInput = Replace(strInput,"™","") ' Breaks SYDI-Overview
-		strInput = Replace(strInput,"©","") ' Breaks SYDI-Overview
+		strInput = Replace(strInput,"Â™","") ' Breaks SYDI-Overview
+		strInput = Replace(strInput,"Â©","") ' Breaks SYDI-Overview
 		strInput = Replace(strInput,chr(147),"") ' Breaks SYDI-Overview
 		strInput = Replace(strInput,chr(148),"") ' Breaks SYDI-Overview
-		strInput = Replace(strInput,"–","-") '  Can break XML files with SYDI-Transform
+		strInput = Replace(strInput,"Â–","-") '  Can break XML files with SYDI-Transform
 		
 	End If
 	Scrub4XML = strInput
