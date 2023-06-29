@@ -153,7 +153,7 @@ Sub TransformFiles()
 	Set objXML = CreateObject("Microsoft.XMLDOM")
 	Set objXSL = CreateObject("Microsoft.XMLDOM")
 	Set objFS = CreateObject("Scripting.FileSystemObject")
-	Set objFSOutput = objFS.CreateTextFile(strOutputFile, True)
+	Set objFSOutput = objFS.CreateTextFile(strOutputFile, True, True)
 
 	objXML.ValidateOnParse = True
 	objXSL.ValidateOnParse = True	
